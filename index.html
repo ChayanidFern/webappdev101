@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chayanid Niyabud — ทุ่งดอกกุหลาบ</title>
+  <style>
+    :root{--bg:#fff6f8;--rose1:#ffb3c7;--rose2:#ff7fa3;--leaf:#6fbf7a;--text:#3b2130}
+    html,body{height:100%;margin:0;font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;background:var(--bg)}
+    .stage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px;box-sizing:border-box;position:relative;overflow:hidden}
+
+    /* rose field background: layered SVG pattern + gradient */
+    .bg-roses{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,#fff2f6 0%, #ffeaf0 50%, #ffdfe8 100%);}
+    .roses-pattern{position:absolute;left:0;right:0;bottom:0;height:60vh;background-repeat:repeat-x;background-size:280px 200px;opacity:0.98}
+    /* create a subtle rose pattern using SVG data URI */
+    .roses-pattern{background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='200' viewBox='0 0 280 200'> <defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23ffe7ee'/><stop offset='1' stop-color='%23ffd1df'/></linearGradient></defs> <g fill='none' stroke='none'> <rect width='280' height='200' fill='none'/> <g transform='translate(20,20)'> <path d='M20 40 C10 10, 60 0, 70 30 S40 80, 20 40' fill='%23ffb3c7' opacity='0.95'/> <circle cx='60' cy='50' r='14' fill='%23ff7fa3' opacity='0.95'/> <path d='M120 30 C110 0, 160 0, 170 30 C180 60, 140 80, 120 30' fill='%23ffb3c7' opacity='0.95'/> <circle cx='180' cy='60' r='16' fill='%23ff7fa3' opacity='0.95'/> <path d='M240 50 C230 20, 280 10, 290 40 C300 70, 260 90, 240 50' fill='%23ffb3c7' opacity='0.95'/> </g> </g></svg>");}
+
+    /* soft meadow gradient in front */
+    .meadow{position:absolute;left:0;right:0;bottom:0;height:28vh;background:linear-gradient(180deg,#bfe6c9 0%, #95d68f 100%);z-index:1}
+
+    /* main card */
+    .card{position:relative;z-index:10;max-width:900px;width:94%;padding:36px;border-radius:20px;background:rgba(255,255,255,0.75);box-shadow:0 20px 40px rgba(60,20,40,0.08);backdrop-filter: blur(6px);display:flex;align-items:center;gap:28px}
+    .hero{flex:0 0 220px;height:220px;border-radius:14px;background:linear-gradient(180deg,var(--rose1),var(--rose2));display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .hero:after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.12), transparent 10%), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 12%)}
+
+    /* floating rose petal animation */
+    .petal{position:absolute;width:22px;height:14px;background:radial-gradient(closest-side,#ff7fa3,#ffb3c7);border-radius:12px;opacity:0.95;transform-origin:center;filter:drop-shadow(0 6px 8px rgba(0,0,0,0.08))}
+    .petal.p1{left:18%;top:10%;animation:float1 12s linear infinite}
+    .petal.p2{left:40%;top:6%;animation:float2 10s linear infinite}
+    .petal.p3{left:72%;top:18%;animation:float3 14s linear infinite}
+    .petal.p4{left:88%;top:8%;animation:float2 11s linear infinite}
+
+    @keyframes float1{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-70px) rotate(35deg)}100%{transform:translateY(0) rotate(0)}}
+    @keyframes float2{0%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-90px) rotate(20deg)}100%{transform:translateY(0) rotate(-10deg)}}
+    @keyframes float3{0%{transform:translateY(0) rotate(6deg)}50%{transform:translateY(-60px) rotate(-25deg)}100%{transform:translateY(0) rotate(6deg)}}
+
+    /* text area */
+    .info{flex:1;color:var(--text)}
+    h1{margin:0;font-size:3rem;line-height:1;color:#8b2745}
+    p.lead{margin:12px 0 0;color:#6d4a5c;font-size:1.05rem}
+
+    /* responsive */
+    @media (max-width:720px){.card{flex-direction:column;text-align:center}.hero{width:180px;height:180px}.petal{display:none}h1{font-size:2rem}}
+
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="bg-roses"></div>
+    <div class="roses-pattern" aria-hidden="true"></div>
+    <div class="meadow" aria-hidden="true"></div>
+
+    <div class="card" role="main" aria-label="ทุ่งดอกกุหลาบ">
+      <div class="hero" aria-hidden="true">
+        <!-- simple SVG rose icon -->
+        <svg width="110" height="110" viewBox="0 0 64 64" aria-hidden="true">
+          <g fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="32" cy="32" r="18" fill="rgba(255,255,255,0.12)"/>
+            <path d="M32 22c-6 1-10 6-10 10 0 6 8 12 10 12s10-6 10-12c0-4-4-9-10-10z" fill="#fff" opacity="0.06"/>
+            <path d="M32 20c4 0 8 3 10 6 1 2 2 4 1 6-1 3-6 7-11 7s-9-4-10-7c-1-2 0-4 1-6 2-3 6-6 9-6z" fill="#fff" opacity="0.12"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="info">
+        <h1>Chayanid Niyabud</h1>
+        <p class="lead">
+        </p>
+      </div>
+    </div>
+
+    <!-- animated petals floating across the full stage -->
+    <div class="petal p1" aria-hidden="true"></div>
+    <div class="petal p2" aria-hidden="true"></div>
+    <div class="petal p3" aria-hidden="true"></div>
+    <div class="petal p4" aria-hidden="true"></div>
+
+  </div>
+
+  <script>
+    // gentle random movement for hero to feel alive
+    const hero = document.querySelector('.hero');
+    setInterval(()=>{
+      const dx = (Math.random()-0.5)*6; const dy = (Math.random()-0.5)*6; const r = (Math.random()-0.5)*4;
+      hero.animate([{transform:'translate(0,0) rotate(0)'},{transform:`translate(${dx}px,${dy}px) rotate(${r}deg)`},{transform:'translate(0,0) rotate(0)'}],{duration:3000+Math.random()*2400,easing:'ease-in-out'});
+    }, 2400);
+  </script>
+</body>
+</html>
